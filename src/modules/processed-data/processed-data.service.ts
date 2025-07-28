@@ -20,7 +20,7 @@ export class ProcessedDataService {
       platform, 
       search, 
       sort_by = 'created_at', 
-      sort_order = 'DESC' 
+      sort_order = 'ASC' 
     } = queryDto;
     
     const queryBuilder = this.processedDataRepository.createQueryBuilder('data');
