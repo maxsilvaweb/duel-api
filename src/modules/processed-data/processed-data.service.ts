@@ -12,32 +12,33 @@ export class ProcessedDataService {
   ) {}
 
   async findAll(queryDto: QueryProcessedDataDto) {
-    const { 
-      page = 1, 
-      limit = 10, 
-      user_id, 
-      brand, 
-      platform, 
-      search, 
-      sort_by = 'created_at', 
-      sort_order = 'ASC' 
+    const {
+      page = 1,
+      limit = 10,
+      user_id,
+      brand,
+      platform,
+      search,
+      sort_by = 'created_at',
+      sort_order = 'ASC',
     } = queryDto;
-    
-    const queryBuilder = this.processedDataRepository.createQueryBuilder('data');
-    
+
+    const queryBuilder =
+      this.processedDataRepository.createQueryBuilder('data');
+
     // Apply filters
     this.applyFilters(queryBuilder, { user_id, brand, platform, search });
-    
+
     // Apply sorting
     queryBuilder.orderBy(`data.${sort_by}`, sort_order);
-    
+
     // Apply pagination
     const skip = (page - 1) * limit;
     queryBuilder.skip(skip).take(limit);
-    
+
     // Execute query
     const [data, total] = await queryBuilder.getManyAndCount();
-    
+
     return {
       data,
       pagination: {
@@ -64,16 +65,20 @@ export class ProcessedDataService {
 
   async getAnalytics() {
     const totalRecords = await this.processedDataRepository.count();
-    
+
     const platformStats = await this.processedDataRepository
       .createQueryBuilder('data')
-      .select('data.platform, COUNT(*) as count, SUM(data.likes) as total_likes, SUM(data.reach) as total_reach')
+      .select(
+        'data.platform, COUNT(*) as count, SUM(data.likes) as total_likes, SUM(data.reach) as total_reach',
+      )
       .groupBy('data.platform')
       .getRawMany();
 
     const brandStats = await this.processedDataRepository
       .createQueryBuilder('data')
-      .select('data.brand, COUNT(*) as count, SUM(data.total_sales_attributed) as total_sales')
+      .select(
+        'data.brand, COUNT(*) as count, SUM(data.total_sales_attributed) as total_sales',
+      )
       .groupBy('data.brand')
       .orderBy('total_sales', 'DESC')
       .limit(10)
@@ -81,7 +86,9 @@ export class ProcessedDataService {
 
     const topPerformers = await this.processedDataRepository
       .createQueryBuilder('data')
-      .select('data.name, data.email, SUM(data.likes) as total_likes, SUM(data.reach) as total_reach')
+      .select(
+        'data.name, data.email, SUM(data.likes) as total_likes, SUM(data.reach) as total_reach',
+      )
       .groupBy('data.name, data.email')
       .orderBy('total_reach', 'DESC')
       .limit(10)
@@ -97,7 +104,12 @@ export class ProcessedDataService {
 
   private applyFilters(
     queryBuilder: SelectQueryBuilder<ProcessedData>,
-    filters: { user_id?: string; brand?: string; platform?: string; search?: string },
+    filters: {
+      user_id?: string;
+      brand?: string;
+      platform?: string;
+      search?: string;
+    },
   ) {
     const { user_id, brand, platform, search } = filters;
 
@@ -110,7 +122,9 @@ export class ProcessedDataService {
     }
 
     if (platform) {
-      queryBuilder.andWhere('data.platform ILIKE :platform', { platform: `%${platform}%` });
+      queryBuilder.andWhere('data.platform ILIKE :platform', {
+        platform: `%${platform}%`,
+      });
     }
 
     if (search) {
