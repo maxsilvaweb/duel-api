@@ -19,7 +19,7 @@ export class ProcessedDataService {
       brand,
       platform,
       search,
-      sort_by = 'created_at',
+      sort_by = 'id',
       sort_order = 'ASC',
     } = queryDto;
 
