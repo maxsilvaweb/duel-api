@@ -12,7 +12,16 @@ export class ProcessedDataService {
   ) {}
 
   async findAll(queryDto: QueryProcessedDataDto) {
-    const { page, limit, user_id, brand, platform, search, sort_by, sort_order } = queryDto;
+    const { 
+      page = 1, 
+      limit = 10, 
+      user_id, 
+      brand, 
+      platform, 
+      search, 
+      sort_by = 'created_at', 
+      sort_order = 'DESC' 
+    } = queryDto;
     
     const queryBuilder = this.processedDataRepository.createQueryBuilder('data');
     
