@@ -1,2 +1,2 @@
-# Add your actual database URL here
 database_url = "postgres://u3d6ml74ctkbp9:p5d853481f785805b525e5a46b70905637d5efef609a3662f9aa97c3f4e065d85@c2fbt7u7f4htth.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com:5432/db4m6ec3l686os"
+app_name = "duel-api"

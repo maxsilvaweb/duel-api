@@ -11,9 +11,8 @@ provider "heroku" {
   # Set HEROKU_API_KEY environment variable
 }
 
-# Heroku app in EU region
 resource "heroku_app" "duel_api" {
-  name   = "duel-api-eu"  # Updated name to match repo
+  name   = var.app_name  # Now uses variable
   region = "eu"  # This ensures EU deployment
   
   config_vars = {

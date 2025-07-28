@@ -3,3 +3,9 @@ variable "database_url" {
   type        = string
   sensitive   = true
 }
+
+variable "app_name" {
+  description = "Heroku app name"
+  type        = string
+  default     = "duel-api-eu"
+}
