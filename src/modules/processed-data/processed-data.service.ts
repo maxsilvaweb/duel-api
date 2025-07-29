@@ -55,7 +55,7 @@ export class ProcessedDataService {
   async findByUserId(userId: string) {
     return this.processedDataRepository.find({
       where: { user_id: userId },
-      order: { created_at: 'DESC' },
+      order: { created_at: 'ASC' },
     });
   }
 
@@ -80,7 +80,7 @@ export class ProcessedDataService {
         'data.brand, COUNT(*) as count, SUM(data.total_sales_attributed) as total_sales',
       )
       .groupBy('data.brand')
-      .orderBy('total_sales', 'DESC')
+      .orderBy('total_sales', 'ASC')
       .limit(10)
       .getRawMany();
 
@@ -90,7 +90,7 @@ export class ProcessedDataService {
         'data.name, data.email, SUM(data.likes) as total_likes, SUM(data.reach) as total_reach',
       )
       .groupBy('data.name, data.email')
-      .orderBy('total_reach', 'DESC')
+      .orderBy('total_reach', 'ASC')
       .limit(10)
       .getRawMany();
 

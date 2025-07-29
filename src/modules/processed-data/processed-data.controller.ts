@@ -6,12 +6,7 @@ import {
   ParseIntPipe,
   NotFoundException,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiQuery,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ProcessedDataService } from './processed-data.service';
 import { ProcessedData } from '../../entities/processed-data.entity';
 import { QueryProcessedDataDto } from './dto/query-processed-data.dto';
@@ -22,7 +17,9 @@ export class ProcessedDataController {
   constructor(private readonly processedDataService: ProcessedDataService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Get all processed data with filtering and pagination' })
+  @ApiOperation({
+    summary: 'Get all processed data with filtering and pagination',
+  })
   @ApiResponse({ status: 200, description: 'Success', type: [ProcessedData] })
   async findAll(@Query() queryDto: QueryProcessedDataDto) {
     return this.processedDataService.findAll(queryDto);
@@ -48,7 +45,11 @@ export class ProcessedDataController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get a specific record by ID' })
-  @ApiResponse({ status: 200, description: 'Record found', type: ProcessedData })
+  @ApiResponse({
+    status: 200,
+    description: 'Record found',
+    type: ProcessedData,
+  })
   @ApiResponse({ status: 404, description: 'Record not found' })
   async findById(@Param('id', ParseIntPipe) id: number) {
     const data = await this.processedDataService.findById(id);

@@ -10,7 +10,12 @@ export class QueryProcessedDataDto {
   @Min(1)
   page?: number = 1;
 
-  @ApiPropertyOptional({ description: 'Items per page', minimum: 1, maximum: 100, default: 10 })
+  @ApiPropertyOptional({
+    description: 'Items per page',
+    minimum: 1,
+    maximum: 100,
+    default: 10,
+  })
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
@@ -46,9 +51,15 @@ export class QueryProcessedDataDto {
   @IsString()
   sort_by?: string = 'id';
 
-  @ApiPropertyOptional({ description: 'Sort order', enum: ['ASC', 'DESC'] })
+  @ApiPropertyOptional({ description: 'Sort order', enum: ['ASC'] })
   @IsOptional()
   @IsString()
-  @Transform(({ value }) => value.toUpperCase())
-  sort_order?: 'ASC' | 'DESC' = 'ASC';
+  @Transform(({ value }) =>
+    typeof value === 'string'
+      ? value.toUpperCase() === 'ASC'
+········? ('ASC' as const)
+          : undefined
+      : undefined,
+  )
+  sort_order?: 'ASC';
 }
