@@ -11,7 +11,13 @@ import { getDatabaseConfig } from '@/config/database.config';
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: getDatabaseConfig,
+      useFactory: async (configService: ConfigService) => {
+        const config = (await getDatabaseConfig(configService)) ?? null;
+        if (!config) {
+          throw new Error('Failed to load database configuration');
+        }
+        return config;
+      },
       inject: [ConfigService],
     }),
     ProcessedDataModule,
