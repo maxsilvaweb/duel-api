@@ -38,14 +38,17 @@ export class QueryProcessedDataDto {
   @IsString()
   search?: string;
 
-  @ApiPropertyOptional({ description: 'Sort by field', enum: ['created_at', 'likes', 'reach', 'total_sales_attributed'] })
+  @ApiPropertyOptional({
+    description: 'Sort by field',
+    enum: ['created_at', 'likes', 'reach', 'total_sales_attributed'],
+  })
   @IsOptional()
   @IsString()
-  sort_by?: string = 'created_at';
+  sort_by?: string = 'id';
 
   @ApiPropertyOptional({ description: 'Sort order', enum: ['ASC', 'DESC'] })
   @IsOptional()
   @IsString()
   @Transform(({ value }) => value.toUpperCase())
-  sort_order?: 'ASC' | 'DESC' = 'DESC';
+  sort_order?: 'ASC' | 'DESC' = 'ASC';
 }
