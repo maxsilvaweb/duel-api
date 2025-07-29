@@ -16,6 +16,12 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@/*": ["src/*"],
+      "@/entities/*": ["src/entities/*"],
+      "@/modules/*": ["src/modules/*"],
+      "@/config/*": ["src/config/*"]
+    }
   }
 }

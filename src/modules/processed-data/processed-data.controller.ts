@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ProcessedDataService } from './processed-data.service';
-import { ProcessedData } from '../../entities/processed-data.entity';
+import { ProcessedData } from '@/entities/processed-data.entity';
 import { QueryProcessedDataDto } from './dto/query-processed-data.dto';
 
 @ApiTags('processed-data')

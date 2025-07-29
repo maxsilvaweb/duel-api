@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
-import { ProcessedData } from '../../entities/processed-data.entity';
+import { ProcessedData } from '@/entities/processed-data.entity';
 import { QueryProcessedDataDto } from './dto/query-processed-data.dto';
 
 @Injectable()
