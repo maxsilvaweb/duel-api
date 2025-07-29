@@ -57,9 +57,9 @@ export class QueryProcessedDataDto {
   @Transform(({ value }) =>
     typeof value === 'string'
       ? value.toUpperCase() === 'ASC'
-········? ('ASC' as const)
-          : undefined
+        ? ('ASC' as const)
+        : undefined
       : undefined,
   )
-  sort_order?: 'ASC';
+  sort_order?: 'ASC' = 'ASC';
 }
