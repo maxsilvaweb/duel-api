@@ -1,4 +1,4 @@
-# Duel API
+# NestJS RESt API
 
 A backend service for managing duels and game interactions. Built with NestJS and TypeScript.
 
